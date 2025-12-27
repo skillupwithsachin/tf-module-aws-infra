@@ -35,7 +35,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam:138775093046:role/skillupwithsachin-gha-terraform-svc-role
+          role-to-assume: arn:aws:iam::138775093046:role/skillupwithsachin-gha-terraform-svc-role
           aws-region: us-east-1
 
       - name: Run Terragrunt Plan
