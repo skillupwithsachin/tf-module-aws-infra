@@ -21,9 +21,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           
       - name: Setup TFenv
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.14.3
+        uses: ./.github/actions/setup-tfenv
       
       - name: Install tgenv
         run: |
