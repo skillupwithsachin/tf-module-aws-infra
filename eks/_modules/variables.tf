@@ -6,7 +6,7 @@ variable "cluster_name" {
 variable "k8s_version" {
   type        = string
   default     = "1.34"
-  description = "The default Kubernetes version to use with this cluster"
+  description = "The default Kubernetes version to use with this cluster."
 }
 
 variable "cluster_endpoint_public_access" {
