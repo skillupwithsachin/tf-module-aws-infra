@@ -1,15 +1,15 @@
 ---
-name: Destroy Terraform Changes
+name: Deploy Terrafrom Changes
 
 on:
-  workflow_dispatch:
-    inputs:
-      cluster-name:
-        description: "EKS Cluster Name to Destroy"
-        required: true
+  pull_request:
+    branches:
+      - main
+    paths:
+      - eks/**
 
 jobs:
-  destroy:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write #required for oidc auth
@@ -23,7 +23,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.2
-     
+      
       - name: Install tgenv
         run: |
           git clone https://github.com/tgenv/tgenv.git ~/.tgenv
@@ -35,16 +35,16 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam:138775093046:role/skillupwithsachin-gha-terraform-svc-role
+          role-to-assume: arn:aws:iam::138775093046:role/skillupwithsachin-gha-terraform-svc-role
           aws-region: us-east-1
 
-      - name: Run Terragrunt Destroy
+      - name: Run Terragrunt Apply
         working-directory: environments/dev/skillupwithsachin-eks-demo
         run: |
           tgenv install
           tgenv use
           terragrunt init
-          terragrunt destroy --terragrunt-non-interactive --auto-approve
+          terragrunt apply --terragrunt-non-interactive --auto-approve
       
       - name: Cleanup
         run: |
