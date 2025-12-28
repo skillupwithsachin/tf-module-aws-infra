@@ -12,7 +12,7 @@ variable "k8s_version" {
 variable "cluster_endpoint_public_access" {
   description = "Indicates whether or not the Amazon EKS public API server endpoint is enabled."
   type        = bool
-  default     = "false"
+  default     = "true"
 }
 
 variable "cluster_service_ipv4_cidr" {
