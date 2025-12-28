@@ -21,15 +21,10 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           
       - name: Setup TFenv
-        uses: ./.github/actions/setup-tfenv
-      
-      - name: Install tgenv
-        run: |
-          git clone https://github.com/tgenv/tgenv.git ~/.tgenv
-          echo "$HOME/.tgenv/bin" >> $GITHUB_PATH
-      
-      - name: Verify tgenv
-        run: tgenv --version
+        uses: skillupwithsachin/actions/setup-tfenv@main
+
+      - name: Setup tgenv
+        uses: skillupwithsachin/actions/setup-tgenv@main
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
